@@ -42,7 +42,7 @@
 import api from '../fetch.js';
 
 export default {
-    emits:['reloadData'],
+    emits:['reloadData','addTplWord','update:name'],
     props:['name','tplWord','report'],
     data: function(){
       return {

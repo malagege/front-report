@@ -3,30 +3,30 @@
   <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
   <Header />
   <div class="container">
-    <div>
 
       <!-- :name="state.name" 
       @input:name="chgUserName"  -->
 
-    <Topic v-for="report in reports"
-      :report="report"
-      @reloadData="reloadData"
-      v-model:name="state.name"
-      @update:name="chgUserName"
-      :tplWord="state.tplWord" 
-      @addTplWord="addTplWord" 
-      :key="report"/>
+    <div v-if="$route.name == 'topic'">
+      <component :is="Topic" v-for="report in reports"
+        :report="report"
+        @reloadData="reloadData"
+        v-model:name="state.name"
+        @update:name="chgUserName"
+        :tplWord="state.tplWord" 
+        @addTplWord="addTplWord" 
+        :key="report.id" />
     </div>
-    <hr>
-    <div>
-    <TplWord :tplWord="state.tplWord" 
-              @updateTplWord="cghTplWord"
-              @deleteTplWord="deleteTplWord"
-              @addTplWord="addTplWord"
-              />
+    <div v-else-if="$route.name == 'tplword'">
+      <TplWord :tplWord="state.tplWord" 
+                @updateTplWord="cghTplWord"
+                @deleteTplWord="deleteTplWord"
+                @addTplWord="addTplWord"
+                />      
     </div>
-    <hr>
-    <Leo @reloadData="reloadData" />
+    <div v-else>
+      <Leo @reloadData="reloadData" />
+    </div>
   </div>
 
 </template>
@@ -44,7 +44,7 @@ import api from './fetch.js';
 const name = ref('testffff')
 var reports = ref([]);
 reloadData();
-
+const test = ref('Topic')
 const state = useStorage('vue-use-locale-storage', {
   name: '人名',
   tplWord: [' GPS 打卡 VPN已連 體溫: ',' GPS 打卡 體溫: ','DONE']
