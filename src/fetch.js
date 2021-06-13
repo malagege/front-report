@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const HOST = ""; // local端要拿掉
+const HOST = import.meta.env.VITE_BACKEND_HOST || ''; // local端要拿掉
 
 // 取得 Report List ok 
 function getReports(){
